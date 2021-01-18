@@ -137,26 +137,4 @@ public class SmiSdkReactModule extends ReactContextBaseJavaModule {
 
         return payload;
     }
-
-    @ReactMethod
-    public void startSponsoredData() {
-        Log.d(TAG, "startSponsoredData.");
-        try {
-            SmiSdk.startSponsoredData();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @ReactMethod
-    public void stopSponsoredData() {
-        Log.d(TAG, "stopSponsoredData.");
-        try {
-            SmiSdk.stopSponsoredData();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-
 }
