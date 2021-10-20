@@ -53,7 +53,8 @@ typedef NS_ENUM(NSInteger, SdReason) {
     SD_NOT_AVAILABLE_GW_CONN_FAILURE_PKG_MTHLY_FUP_REACHED = 36,
     SD_NOT_AVAILABLE_GW_CONN_FAILURE_PKG_OVR_ALL_FUP_REACHED = 37,
     SD_NOT_AVAILABLE_VPN_PERMISSION_CANCELLED = 38,
-    
+    SD_NOT_AVAILABLE_USR_ID_OR_TAG_UPDATE = 39,
+
     SD_NOT_AVAILABLE_REASON_UNKNOWN = 100
 };
 
@@ -126,12 +127,13 @@ typedef NS_ENUM(NSInteger, SdReason) {
 /* VPN APIs */
 +(void) initSponsoredVPN:(NSString*)sdkKey showSDMessage:(Boolean)showSDMessage startVPN:(Boolean)startVPN ctrlVpnPerm:(Boolean)ctrlVpnPerm;
 +(void) initSponsoredVPN:(NSString*)sdkKey showSDMessage:(Boolean)showSDMessage startVPN:(Boolean) startVPN;
++(void) initSponsoredVPN:(NSString*)sdkKey showSDMessage:(Boolean)showSDMessage startVPN:(Boolean) startVPN userTags:(NSArray *)userTags;
 +(void) initSponsoredVPN:(NSString*)sdkKey showSDMessage:(Boolean)showSDMessage;
 //+(void) testSetupVpn:(NSString*)token deviceId:(NSString*)deviceId hostName:(NSString*) hostName;
 +(void) startSponsorVpn;
 +(void) stopSponsorVpn;
 +(SdState) getVpnSdState;
-
++(void) updateUserTags:(NSArray *)tags;
 #endif
 @end
 
