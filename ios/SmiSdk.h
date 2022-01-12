@@ -133,7 +133,7 @@ typedef NS_ENUM(NSInteger, SdReason) {
 +(void) startSponsorVpn;
 +(void) stopSponsorVpn;
 +(SdState) getVpnSdState;
-+(void) updateUserTags:(NSArray *)tags;
++(void) updateVPNUserTags:(NSArray *)tags;
 #endif
 @end
 
