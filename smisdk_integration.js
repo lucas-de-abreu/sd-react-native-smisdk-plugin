@@ -145,21 +145,22 @@ function projectConfigAndroid(folder) {
     // Application class not available. 
     //Copy application class and update manifest with application name
 
-    const manifest = readManifest(manifestPath);
-    const packageName = getPackageName(manifest);
-    const packageNameStr = "package " + packageName + ';\n';
-    const packageFolder = packageName.replace(/\./g, path.sep);
-    const appPackagePath = path.join(sourceDir, `src/main/java/${packageFolder}`);
+    console.log('Application class not available. Please use sample ApplicaitionClass.txt to create one and update AndroidManifest.xml with application name.';
+    // const manifest = readManifest(manifestPath);
+    // const packageName = getPackageName(manifest);
+    // const packageNameStr = "package " + packageName + ';\n';
+    // const packageFolder = packageName.replace(/\./g, path.sep);
+    // const appPackagePath = path.join(sourceDir, `src/main/java/${packageFolder}`);
 
-    var datamiAppFile = fs.readFileSync('ApplicationClass.txt', 'utf8')
-    if (datamiAppFile.search(packageNameStr) < 0) {
-      var datamiAppFile = insert(datamiAppFile, 0, packageNameStr);
-    }
-    var datamiApplicationClassName = 'MainApplication';
-    fs.writeFileSync(appPackagePath + '/' + datamiApplicationClassName + '.java', datamiAppFile, 'utf8');
+    // var datamiAppFile = fs.readFileSync('ApplicationClass.txt', 'utf8')
+    // if (datamiAppFile.search(packageNameStr) < 0) {
+    //   var datamiAppFile = insert(datamiAppFile, 0, packageNameStr);
+    // }
+    // var datamiApplicationClassName = 'MainApplication';
+    // fs.writeFileSync(appPackagePath + '/' + datamiApplicationClassName + '.java', datamiAppFile, 'utf8');
 
     // update manifest with app name
-    updateManifestFile(manifestPath, datamiApplicationClassName);
+    // //updateManifestFile(manifestPath, datamiApplicationClassName);
 
     // update configuration file
     const stringsXmlPath = findStringsXml(sourceDir);
