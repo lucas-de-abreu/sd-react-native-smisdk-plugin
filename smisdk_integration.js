@@ -145,7 +145,7 @@ function projectConfigAndroid(folder) {
     // Application class not available. 
     //Copy application class and update manifest with application name
 
-    console.log('Application class not available. Please use sample ApplicaitionClass.txt to create one and update AndroidManifest.xml with application name.';
+    console.log('Application class not available. Please use sample ApplicaitionClass.txt to create one and update AndroidManifest.xml with application name.');
     // const manifest = readManifest(manifestPath);
     // const packageName = getPackageName(manifest);
     // const packageNameStr = "package " + packageName + ';\n';
