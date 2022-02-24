@@ -1,6 +1,8 @@
 
 import android.app.Application;
 import android.content.Context;
+import android.util.Log;
+
 //////// Datami Imports ////////
 import com.datami.smi.SdStateChangeListener;
 import com.datami.smi.SmiResult;
@@ -52,10 +54,41 @@ public class MainApplication extends Application implements SdStateChangeListene
   public void onCreate() {
     super.onCreate();
 //  Datami init API to start SD.
-    SmiSdk.initSponsoredData(getResources().getString(R.string.smisdk_apikey),
-    this, null, R.mipmap.ic_launcher,
-    getResources().getBoolean(R.bool.smisdk_show_messaging),
-    Arrays.asList(getResources().getStringArray(R.array.smisdk_exclusion_domin)));
+     int userIdRes = getResources().getIdentifier("smisdk_user_id", "string", this.getPackageName());
+     int userTagRes = getResources().getIdentifier("smisdk_user_tag", "array", this.getPackageName());
+     int startProxyRes = getResources().getIdentifier("smisdk_start_proxy", "bool", this.getPackageName());
+     String userId = "";
+     List<String> userTags = null;
+     boolean isStartProxy = true;
+     try{
+         if(userIdRes!=0){
+             userId = getResources().getString(userIdRes);
+         }
+     }catch (Exception ex){
+         ex.printStackTrace();
+     }
+     try{
+         if(userTagRes!=0){
+             userTags = Arrays.asList(getResources().getStringArray(userTagRes));
+         }
+     }catch (Exception ex){
+         ex.printStackTrace();
+     }
+     try{
+         if(startProxyRes!=0){
+             isStartProxy = getResources().getBoolean(startProxyRes);
+         }
+     }catch (Exception ex){
+         ex.printStackTrace();
+     }
+
+     Log.d("[dmi]Application", "usrIDRes: " + userIdRes + ", usrTagRes: " + userTagRes + ", stProxyRes: " + startProxyRes);
+     Log.d("[dmi]Application", "usrId: " + userId + ", usrTags: " + userTags + ", stProxy: " + isStartProxy);
+
+     SmiSdk.initSponsoredData(getResources().getString(R.string.smisdk_apikey),
+     this, userId, R.mipmap.ic_launcher,
+     getResources().getBoolean(R.bool.smisdk_show_messaging),
+     Arrays.asList(getResources().getStringArray(R.array.smisdk_exclusion_domin)), userTags, isStartProxy);
 //
     SoLoader.init(this, /* native exopackage */ false);
     initializeFlipper(this, getReactNativeHost().getReactInstanceManager());

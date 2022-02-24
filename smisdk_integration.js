@@ -192,9 +192,43 @@ function projectConfigAndroid(folder) {
           const smiPackageName = ', new SmiSdkReactPackage()';
           const smiPackageNameFor62 = 'packages.add(new SmiSdkReactPackage());';
 
-          const packageImport = 'import com.datami.smi.SdStateChangeListener; \nimport com.datami.smi.SmiResult; \nimport com.datami.smi.SmiSdk; \nimport com.datami.smisdk_plugin.SmiSdkReactModule; \nimport com.datami.smisdk_plugin.SmiSdkReactPackage; \n';
+   		    const packageImport = 'import com.datami.smi.SdStateChangeListener; \nimport com.datami.smi.SmiResult; \nimport com.datami.smi.SmiSdk; \nimport com.datami.smisdk_plugin.SmiSdkReactModule; \nimport com.datami.smisdk_plugin.SmiSdkReactPackage; \nimport android.util.Log;\n';
 
-          const initSponsoredDataAPI = '\nSmiSdk.initSponsoredData(getResources().getString(R.string.smisdk_apikey), \nthis, null, R.mipmap.ic_launcher,\ngetResources().getBoolean(R.bool.smisdk_show_messaging),\nArrays.asList(getResources().getStringArray(R.array.smisdk_exclusion_domin)));';
+   		 	  const initSponsoredDataAPI = "\n     int userIdRes = getResources().getIdentifier(\"smisdk_user_id\", \"string\", this.getPackageName());\n" +
+                "     int userTagRes = getResources().getIdentifier(\"smisdk_user_tag\", \"array\", this.getPackageName());\n" +
+                "     int startProxyRes = getResources().getIdentifier(\"smisdk_start_proxy\", \"bool\", this.getPackageName());\n" +
+                "     String userId = \"\";\n" +
+                "     List<String> userTags = null;\n" +
+                "     boolean isStartProxy = true;\n" +
+                "     try{\n" +
+                "         if(userIdRes!=0){\n" +
+                "             userId = getResources().getString(userIdRes);\n" +
+                "         }\n" +
+                "     }catch (Exception ex){\n" +
+                "         ex.printStackTrace();\n" +
+                "     }\n" +
+                "     try{\n" +
+                "         if(userTagRes!=0){\n" +
+                "             userTags = Arrays.asList(getResources().getStringArray(userTagRes));\n" +
+                "         }\n" +
+                "     }catch (Exception ex){\n" +
+                "         ex.printStackTrace();\n" +
+                "     }\n" +
+                "     try{\n" +
+                "         if(startProxyRes!=0){\n" +
+                "             isStartProxy = getResources().getBoolean(startProxyRes);\n" +
+                "         }\n" +
+                "     }catch (Exception ex){\n" +
+                "         ex.printStackTrace();\n" +
+                "     }\n" +
+                "\n" +
+                "     Log.d(\"[dmi]Application\", \"usrIDRes: \" + userIdRes + \", usrTagRes: \" + userTagRes + \", stProxyRes: \" + startProxyRes);\n" +
+                "     Log.d(\"[dmi]Application\", \"usrId: \" + userId + \", usrTags: \" + userTags + \", stProxy: \" + isStartProxy);\n" +
+                "\n" +
+                "     SmiSdk.initSponsoredData(getResources().getString(R.string.smisdk_apikey),\n" +
+                "     this, userId, R.mipmap.ic_launcher,\n" +
+                "     getResources().getBoolean(R.bool.smisdk_show_messaging),\n" +
+                "     Arrays.asList(getResources().getStringArray(R.array.smisdk_exclusion_domin)), userTags, isStartProxy);";
 
           const onCreateMethod = '\n @Override \n public void onCreate() { \n  super.onCreate();' + initSponsoredDataAPI + ' \n}';
 
