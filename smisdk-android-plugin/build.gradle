@@ -1,4 +1,4 @@
-apply plugin: 'com.android.library'
+imapply plugin: 'com.android.library'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -13,6 +13,6 @@ android {
 }
 
 dependencies {
-    compile 'com.facebook.react:react-native:+'
-    compile 'com.datami:smisdk:+'
+    implementation 'com.facebook.react:react-native:+'
+    implementation 'com.datami:smisdk:+'
 }
