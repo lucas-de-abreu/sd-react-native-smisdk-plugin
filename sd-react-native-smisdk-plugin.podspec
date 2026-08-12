@@ -7,24 +7,19 @@ Pod::Spec.new do |s|
   s.version      = package["version"]
   s.summary      = package["description"]
   s.description  = <<-DESC
-                  sd-react-native-smisdk-plugin
+                  Datami SMISDK React Native Plugin for sponsored/zero-rated mobile data
                    DESC
-  s.homepage     = "https://github.com/github_account/react-native-rn-smi-sdk"
-  # brief license entry:
-  s.license      = "MIT"
-  # optional - use expanded license entry instead:
-  # s.license    = { :type => "MIT", :file => "LICENSE" }
-  s.authors      = { "Your Name" => "yourname@email.com" }
-  s.platforms    = { :ios => "9.0" }
-  s.source       = { :git => "https://github.com/github_account/react-native-rn-smi-sdk.git", :tag => "#{s.version}" }
+  s.homepage     = package["homepage"]
+  s.license      = { :type => "Proprietary", :text => "Datami Mobile Solutions" }
+  s.authors      = { "Datami Inc" => "support@datami.com" }
+  s.platforms    = { :ios => "12.0" }
+  s.source       = { :git => package["repository"]["url"], :tag => "#{s.version}" }
 
   s.source_files = "ios/**/*.{h,c,m,swift}"
   s.ios.preserve_paths      = 'ios/libsmisdk.a'
   s.ios.vendored_libraries  = 'ios/libsmisdk.a'
   s.requires_arc = true
 
-  s.dependency "React"
-  # ...
-  # s.dependency "..."
+  s.dependency "React-Core"
 end
 

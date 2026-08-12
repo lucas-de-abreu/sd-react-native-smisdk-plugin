@@ -5,21 +5,20 @@
   "private": true,
   "files": [
     "README.md",
+    "docs",
+    "patches",
+    "scripts",
     "smisdk-android-plugin",
-    "ApplicationClass.txt",
-    "smisdk_integration.js",
     "index.js",
     "ios",
-    "react-native+0.72.0.patch",
-    "sd-react-native-smisdk-plugin.podspec",
-    "postInstall.sh"
+    "sd-react-native-smisdk-plugin.podspec"
   ],
   "scripts": {
-    "postinstall": "sh postInstall.sh"
+    "postinstall": "sh scripts/postInstall.sh"
   },
   "repository": {
     "type": "git",
-    "url": "https://bitbucket.org/datami/sd-react-native-smisdk-plugin.git"
+    "url": "https://github.com/lucas-de-abreu/sd-react-native-smisdk-plugin.git"
   },
   "peerDependencies": {
     "patch-package": "^6.2.2",
@@ -35,7 +34,7 @@
   },
   "author": "Datami inc",
   "license": "Datami mobile solutions",
-  "homepage": "https://bitbucket.org/datami/sd-react-native-smisdk-plugin",
+  "homepage": "https://github.com/lucas-de-abreu/sd-react-native-smisdk-plugin",
   "dependencies": {
     "xmldom": "^0.6.0"
   }
