@@ -1,1 +1,30 @@
-# Add any directories, files, or patterns you don't want to be tracked by version control
+# Build outputs
+build/
+*.aar
+*.apk
+
+# Android/Gradle
+.gradle/
+local.properties
+*.iml
+.idea/
+.cxx/
+
+# Generated files
+generated/
+.transforms/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Node (if any JS tooling is added)
+node_modules/
+
+# Temporary files
+*.tmp
+*.temp
+tmp/

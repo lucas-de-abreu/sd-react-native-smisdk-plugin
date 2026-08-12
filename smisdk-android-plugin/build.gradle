@@ -1,18 +1,34 @@
 apply plugin: 'com.android.library'
 
+def safeExtGet(prop, fallback) {
+    rootProject.ext.has(prop) ? rootProject.ext.get(prop) : fallback
+}
+
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
+    compileSdkVersion safeExtGet('compileSdkVersion', 36)
+    namespace 'com.datami.smisdk_plugin'
 
     defaultConfig {
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
+        minSdkVersion safeExtGet('minSdkVersion', 24)
+        targetSdkVersion safeExtGet('targetSdkVersion', 36)
         versionCode 1
         versionName "1.0"
+    }
+
+    buildFeatures {
+        buildConfig true
+    }
+
+    publishing {
+        singleVariant("release") {
+            withSourcesJar()
+        }
     }
 }
 
 dependencies {
-    implementation 'com.facebook.react:react-native:+'
-    implementation 'com.datami:smisdk:+'
+    implementation 'com.facebook.react:react-android'
+    // Use 'api' to expose smisdk classes transitively to consuming modules
+    // This allows MainApplication to use SmiSdk, SmiResult, SdStateChangeListener
+    api 'com.datami:smisdk:+'
 }
