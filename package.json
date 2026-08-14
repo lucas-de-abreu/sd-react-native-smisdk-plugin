@@ -1,12 +1,10 @@
 {
   "name": "react-native-smisdk-plugin",
-  "version": "1.2.7",
+  "version": "1.2.11",
   "description": "Datami React native plugin",
   "private": true,
   "files": [
     "README.md",
-    "docs",
-    "patches",
     "scripts",
     "smisdk-android-plugin",
     "index.js",
@@ -21,21 +19,19 @@
     "url": "https://github.com/lucas-de-abreu/sd-react-native-smisdk-plugin.git"
   },
   "peerDependencies": {
-    "patch-package": "^6.2.2",
     "postinstall-postinstall": "^2.1.0",
-    "react": "18.2.0",
-    "react-native": ">=0.72.0 <1.0.x"
+    "react": "19.1.0",
+    "react-native": ">=0.81.0 <1.0.x"
   },
   "devDependencies": {
-    "patch-package": "^6.5.1",
-    "postinstall-postinstall": "^2.1.0",
-    "react": "18.2.0",
-    "react-native": "0.72.0"
+    "react": "19.1.0",
+    "react-native": "0.81.5"
   },
   "author": "Datami inc",
   "license": "Datami mobile solutions",
   "homepage": "https://github.com/lucas-de-abreu/sd-react-native-smisdk-plugin",
   "dependencies": {
-    "xmldom": "^0.6.0"
+    "@xmldom/xmldom": "^0.9.11",
+    "xmldoc": "^3.0.0"
   }
 }

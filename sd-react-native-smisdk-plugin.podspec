@@ -16,10 +16,11 @@ Pod::Spec.new do |s|
   s.source       = { :git => package["repository"]["url"], :tag => "#{s.version}" }
 
   s.source_files = "ios/**/*.{h,c,m,swift}"
-  s.ios.preserve_paths      = 'ios/libsmisdk.a'
-  s.ios.vendored_libraries  = 'ios/libsmisdk.a'
+  s.ios.preserve_paths      = 'ios/libsmisdkvpn.a'
+  s.ios.vendored_libraries  = 'ios/libsmisdkvpn.a'
   s.requires_arc = true
 
   s.dependency "React-Core"
+  s.xcconfig = {'GCC_PREPROCESSOR_DEFINITIONS' => '$(inherited) VPN_API=1' }
 end
 
