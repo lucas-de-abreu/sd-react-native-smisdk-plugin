@@ -42,7 +42,8 @@ RCT_EXPORT_MODULE()
 -(void)startObserving {
     hasListeners = YES;
     if(sr != nil) {
-        [self sendEventWithName:@"DATAMI_EVENT" body:@{@"state": [NSNumber numberWithInteger:sr.sdState]}];
+      NSString *sdStateString = [self getSdStateString:sr.sdState];
+      [self sendEventWithName:@"DATAMI_EVENT" body:@{@"state": sdStateString}];
     }
 }
 
@@ -55,18 +56,42 @@ RCT_EXPORT_MODULE()
         return @[@"DATAMI_EVENT"];
 }
 
+-(NSString *)getSdStateString :(int)state {
+    NSString *sdStateString = @"SD_NOT_AVAILABLE";
+    switch ( state ) {
+    case 1:
+        sdStateString = @"SD_WIFI";
+        break;
+    case 2:
+        sdStateString = @"SD_AVAILABLE";
+        break;
+    default:
+        sdStateString = @"SD_NOT_AVAILABLE";
+        break;
+    }
+
+    return sdStateString;
+}
+
 - (void)handleNotification:(NSNotification *)notif {
     if([notif.name isEqualToString:SDSTATE_CHANGE_NOTIF])
     {   
         sr =  notif.object;
-        NSLog(@"receivedStateChage, sdState: %ld sr.clientIp:%@ sr.carrierName:%@ sdReason: %ld ", (long)sr.sdState, sr.clientIp, sr.carrierName, sr.sdReason);
+        NSString *sdStateString = [self getSdStateString:sr.sdState];
+        NSString *sdReasonString = [SmiSdk getReasonString:sr.sdReason];
+        // NSLog(@"receivedStateChage, sdState: %@ sr.clientIp:%@ sr.carrierName:%@ sdReason: %ld ", [self getSdStateString:sr.sdState], sr.clientIp, sr.carrierName, [SmiSdk getReasonString:sr.sdReason]);
+        NSLog(@"receivedStateChage, sdState: %@ sr.clientIp:%@ sr.carrierName:%@ sdReason: %@ ", sdStateString, sr.clientIp, sr.carrierName, sdReasonString);
+
         if(hasListeners) {
           if(sr.clientIp != nil){
-            [self sendEventWithName:@"DATAMI_EVENT" body:@{@"state": [NSNumber numberWithInteger:sr.sdState],@"sdReason": [NSNumber numberWithInt:sr.sdReason],
-         @"clientIp": sr.clientIp, @"carrierName": sr.carrierName}];
+            // [self sendEventWithName:@"DATAMI_EVENT" body:@{@"state": [NSNumber numberWithInteger:sr.sdState],@"sdReason": [NSNumber numberWithInt:sr.sdReason],
+         // @"clientIp": sr.clientIp, @"carrierName": sr.carrierName}];
+            [self sendEventWithName:@"DATAMI_EVENT" body:@{@"state": sdStateString,@"sdReason": sdReasonString, @"clientIp": sr.clientIp, @"carrierName": sr.carrierName}];
+
           }else{
-            [self sendEventWithName:@"DATAMI_EVENT" body:@{@"state": [NSNumber numberWithInteger:sr.sdState],@"sdReason": [NSNumber numberWithInt:sr.sdReason],
-         @"carrierName": sr.carrierName}];
+            // [self sendEventWithName:@"DATAMI_EVENT" body:@{@"state": [NSNumber numberWithInteger:sr.sdState],@"sdReason": [NSNumber numberWithInt:sr.sdReason],
+         // @"carrierName": sr.carrierName}];
+            [self sendEventWithName:@"DATAMI_EVENT" body:@{@"state": sdStateString,@"sdReason": sdReasonString, @"carrierName": sr.carrierName}];
           }
         }
     }

@@ -27,17 +27,9 @@
         NSLog(@"DATAMI_MESSAGING key not found in plist, using default value");
     }
     
-    NSString* userId;
-    if([infoDict objectForKey:@"DATAMI_USERID"]) {
-        userId = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"DATAMI_USERID"];
-    }
-    else {
-        userId = @"";
-        NSLog(@"DATAMI_USERID key not found in plist, using default value");
-    }
-    
     if([apiKey length]) {
-        [SmiSdk initSponsoredData:apiKey userId: userId showSDMessage:bMessaging];
+        [SmiSdk initSponsoredVPN:apiKey showSDMessage:bMessaging startVPN:YES ctrlVpnPerm:NO];
+
         NSLog(@"Datami sdk initialized with :%@",apiKey );
     }
     else{
